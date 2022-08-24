@@ -1,14 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import tw from "twin.macro";
-import MainLayout from "../components/Layouts/MainLayout";
 
-const ButtonStyle = tw.a`
-px-5 py-2 text-center text-red-500 border border-red-500 rounded cursor-pointer
-`;
-
-export default function Home({ data }) {
-  console.log("render home");
+export default function Home() {
   return (
     <div>
       <Head>
@@ -18,23 +11,13 @@ export default function Home({ data }) {
       </Head>
 
       <main className="container mx-auto">
-        <h1 className="my-20">Demo nextjs project</h1>
-        <Link href="/about">
-          <ButtonStyle>Go to about page</ButtonStyle>
-        </Link>
-        <ul className="my-20">
-          {data.map((item, index) => {
-            return <li key={index}>{item.email}</li>;
-          })}
-        </ul>
+        <h1 className="mt-96 text-center">Demo nextjs project</h1>
+        <p className="block text-center mt-5">
+          <Link href="/about">
+            <a>Go to about page</a>
+          </Link>
+        </p>
       </main>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const res = await fetch(`https://62fbaabfe4bcaf53518aad31.mockapi.io/email`);
-  const data = await res.json();
-
-  return { props: { data } };
 }
