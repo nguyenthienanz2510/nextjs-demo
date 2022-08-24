@@ -1,12 +1,12 @@
 import Link from "next/link";
 import tw from "twin.macro";
+import MainLayout from "../../components/Layouts/MainLayout";
 
 const ButtonStyle = tw.a`
 px-5 py-2 text-center text-red-500 border border-red-500 rounded cursor-pointer
 `;
 
 const About = ({ data }) => {
-  console.log("render about");
   return (
     <>
       <main className="container mx-auto">
@@ -24,7 +24,7 @@ const About = ({ data }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const res = await fetch(`https://62fbaabfe4bcaf53518aad31.mockapi.io/player`);
   const data = await res.json();
 
@@ -32,3 +32,7 @@ export async function getServerSideProps() {
 }
 
 export default About;
+
+About.getLayout = (page) => {
+  return <MainLayout>{page}</MainLayout>;
+};

@@ -1,13 +1,12 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
-import MainLayout from "../components/Layouts/MainLayout";
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
-  );
+  const getLayout = Component.getLayout || ((page) => page);
+
+  console.log(pageProps);
+
+  return getLayout(<Component {...pageProps} />);
 }
 
 export default MyApp;

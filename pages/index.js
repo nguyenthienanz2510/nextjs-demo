@@ -7,7 +7,7 @@ const ButtonStyle = tw.a`
 px-5 py-2 text-center text-red-500 border border-red-500 rounded cursor-pointer
 `;
 
-export default function Home({ data }) {
+const Home = ({ data }) => {
   console.log("render home");
   return (
     <div>
@@ -27,10 +27,29 @@ export default function Home({ data }) {
             return <li key={index}>{item.email}</li>;
           })}
         </ul>
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+            <div className="bg-red-300 w-full h-20 inline-block"></div>
+          </div>
+        </div>
       </main>
     </div>
   );
-}
+};
 
 export async function getServerSideProps() {
   const res = await fetch(`https://62fbaabfe4bcaf53518aad31.mockapi.io/email`);
@@ -38,3 +57,9 @@ export async function getServerSideProps() {
 
   return { props: { data } };
 }
+
+export default Home;
+
+Home.getLayout = (page) => {
+  return <MainLayout>{page}</MainLayout>;
+};
