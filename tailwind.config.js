@@ -20,6 +20,7 @@ module.exports = {
         'color-black': "000000",
         'color-dark-primary': "191C21",
         'color-dark-secondary': "212833",
+        "color-text": "#262626"
       },
     },
   },
