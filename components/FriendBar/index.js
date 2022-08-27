@@ -3,6 +3,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@material-ui/core";
 
 const FriendBar = () => {
+  const createNewChat = () => {
+    console.log("hihi");
+    const input = prompt("Enter an email to chat with");
+    if (!input) return null;
+    const regex =
+      /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (regex.test(input)) {
+    }
+  };
+
   return (
     <FriendBarStyle>
       <Search>
@@ -13,7 +23,9 @@ const FriendBar = () => {
         </IconButtonStyle>
         <SearchInput placeholder="Search..." />
       </Search>
-      <ButtonStartNewChat>Start a new chat</ButtonStartNewChat>
+      <ButtonStartNewChat onClick={createNewChat}>
+        Start a new chat
+      </ButtonStartNewChat>
     </FriendBarStyle>
   );
 };
