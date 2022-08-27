@@ -20,7 +20,7 @@ const Header = () => {
 export default Header;
 
 const HeaderStyle = tw.header`
-  h-[78px] border-b px-5 bg-white dark:bg-color-dark-primary text-color-text dark:text-color-white
+  w-full h-[78px] px-5 bg-white dark:bg-color-dark-primary text-color-text dark:text-color-white
 `;
 
 const HeaderContainer = tw.div`

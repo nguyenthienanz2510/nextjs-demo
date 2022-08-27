@@ -21,9 +21,9 @@ const ButtonChangeTheme = () => {
       (!("color-theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
-      themeToggleLightIcon.classList.remove("hidden");
+      themeToggleLightIcon?.classList.remove("hidden");
     } else {
-      themeToggleDarkIcon.classList.remove("hidden");
+      themeToggleDarkIcon?.classList.remove("hidden");
     }
 
     var themeToggleBtn = document.getElementById("theme-toggle");

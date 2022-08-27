@@ -1,11 +1,22 @@
+import { Avatar } from "@material-ui/core";
 import tw from "twin.macro";
+import { FlexCenterStyle } from "../GlobalStyle";
 
 const MyProfile = () => {
-  return <MyProfileStyle>My Profile</MyProfileStyle>;
+  return (
+    <FlexCenterStyle>
+      <UserAvatar />
+      <UserName>NguyenThienAnZ</UserName>
+    </FlexCenterStyle>
+  );
 };
 
 export default MyProfile;
 
-const MyProfileStyle = tw.div`
-  flex
+const UserAvatar = tw(Avatar)`
+  m-2.5
+`;
+
+const UserName = tw.div`
+  
 `;
