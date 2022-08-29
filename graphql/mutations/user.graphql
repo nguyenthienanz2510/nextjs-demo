@@ -1,0 +1,5 @@
+mutation UserLogin {
+  generateCustomerToken(email: "anz@gmail.com", password: "Umap12345") {
+    token
+  }
+}

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import MainLayout from "../components/layouts/MainLayout";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main className="container mx-auto">
-        <h1 className="mt-96 text-center">Demo nextjs project</h1>
+        <h1 className="mt-96 text-center text-4xl">Demo nextjs project</h1>
         <p className="block text-center mt-5">
           <Link href="/about">
             <a>Go to about page</a>
@@ -21,3 +22,7 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getLayout = function getLayout(page) {
+  return <MainLayout>{page}</MainLayout>;
+};
