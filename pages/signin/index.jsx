@@ -2,8 +2,6 @@ import { FormSignIn } from "../../components";
 import MainLayout from "../../components/layouts/MainLayout";
 import tw from "twin.macro";
 import { TitleH1 } from "../../components/GlobalStyle";
-import client from "../../apollo-client";
-import { gql } from "@apollo/client";
 
 const SignInPage = () => {
   return (

@@ -1,30 +1,8 @@
-import tw from "twin.macro";
+import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { gql, useQuery } from "@apollo/client";
-import ClientOnly from "../ClientOnly";
-import client from "../../apollo-client";
-
-// const QUERY = gql`
-//   query Countries {
-//     countries {
-//       code
-//       name
-//       emoji
-//     }
-//   }
-// `;
-
-const QUERY = gql`
-  query Countries {
-    customer {
-      created_at
-      email
-      firstname
-      is_subscribed
-      lastname
-    }
-  }
-`;
+import tw from "twin.macro";
+import { GET_DOGS } from "../../lib/generate";
+// import ClientOnly from "../ClientOnly";
 
 const FormSignIn = () => {
   const {
@@ -33,67 +11,60 @@ const FormSignIn = () => {
     formState: { errors },
   } = useForm();
 
-  const { data, loading, error } = useQuery(QUERY);
+  const [generateCustomerToken, dataMutation] = useMutation(GET_DOGS);
 
-  console.log(data);
+  console.log(dataMutation);
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (error) {
-    console.error(error);
-    return null;
-  }
-
-  const onSubmit = (data) => console.log(data);
-
+  const onSubmit = (data) => {
+    console.log(data);
+    generateCustomerToken({
+      variables: { email: data.email, password: data.password },
+    });
+  };
   return (
-    <ClientOnly>
-      <FormSignInStyle onSubmit={handleSubmit(onSubmit)}>
-        <LabelStyle htmlFor="email">Email</LabelStyle>
-        <InputStyle
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Your Email"
-          {...register("email", {
-            required: true,
-            pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-          })}
-        />
-        {Object.keys(errors).length !== 0 && (
-          <>
-            {errors.email?.type === "required" && (
-              <SpanStyle>email is required</SpanStyle>
-            )}
-            {errors.email?.type === "pattern" && (
-              <SpanStyle>Invalid email!!!</SpanStyle>
-            )}
-          </>
-        )}
-        <LabelStyle htmlFor="password">Password</LabelStyle>
-        <InputStyle
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          {...register("password", { required: true })}
-        />
-        {Object.keys(errors).length !== 0 && (
-          <>
-            {errors.password?.type === "required" && (
-              <SpanStyle>password is required</SpanStyle>
-            )}
-          </>
-        )}
+    <FormSignInStyle onSubmit={handleSubmit(onSubmit)}>
+      <LabelStyle htmlFor="email">Email</LabelStyle>
+      <InputStyle
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Your Email"
+        {...register("email", {
+          required: true,
+          pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        })}
+      />
+      {Object.keys(errors).length !== 0 && (
+        <>
+          {errors.email?.type === "required" && (
+            <SpanStyle>email is required</SpanStyle>
+          )}
+          {errors.email?.type === "pattern" && (
+            <SpanStyle>Invalid email!!!</SpanStyle>
+          )}
+        </>
+      )}
+      <LabelStyle htmlFor="password">Password</LabelStyle>
+      <InputStyle
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+        {...register("password", { required: true })}
+      />
+      {Object.keys(errors).length !== 0 && (
+        <>
+          {errors.password?.type === "required" && (
+            <SpanStyle>password is required</SpanStyle>
+          )}
+        </>
+      )}
 
-        <ButtonGroup>
-          <RegisterButton>Register</RegisterButton>
-          <SubmitButton type="submit">Sign in</SubmitButton>
-        </ButtonGroup>
-      </FormSignInStyle>
-    </ClientOnly>
+      <ButtonGroup>
+        <RegisterButton>Register</RegisterButton>
+        <SubmitButton type="submit">Sign in</SubmitButton>
+      </ButtonGroup>
+    </FormSignInStyle>
   );
 };
 
