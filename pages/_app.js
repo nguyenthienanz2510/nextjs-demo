@@ -1,10 +1,12 @@
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../firebase";
+import { auth, db } from "../config/firebase";
 import { Loading, Login } from "../components";
 import { ThemeProvider } from "next-themes";
 import { useEffect } from "react";
+import { ref, set } from "firebase/database";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
@@ -12,11 +14,24 @@ function MyApp({ Component, pageProps }) {
   console.log(user);
 
   useEffect(() => {
+    const setUserInDb = async () => {
+      try {
+        await setDoc(
+          doc(db, "users", user?.uid),
+          {
+            email: user?.email,
+            lastSeen: serverTimestamp(),
+            photoURL: user?.photoURL,
+          },
+          { merge: true }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     if (user) {
-      set(ref(db, "users/" + userId), {
-        email: user.email,
-        photoURL: user.photoURL,
-      });
+      setUserInDb();
     }
   }, [user]);
 

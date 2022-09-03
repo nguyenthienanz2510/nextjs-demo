@@ -3,7 +3,7 @@ import SideBarItem from "./SideBarItem/SideBarItem";
 import MessageIcon from "@mui/icons-material/Message";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
+import Logout from "./SideBarItem/Logout";
 const SideBar = () => {
   const data = [
     {
@@ -18,16 +18,13 @@ const SideBar = () => {
       icon: <SettingsIcon />,
       title: "Settings",
     },
-    {
-      icon: <LogoutIcon />,
-      title: "Logout",
-    },
   ];
   return (
     <SideBarStyle>
       {data.map((item, index) => (
         <SideBarItem key={index} icon={item.icon} title={item.title} />
       ))}
+      <Logout />
     </SideBarStyle>
   );
 };
@@ -35,5 +32,5 @@ const SideBar = () => {
 export default SideBar;
 
 const SideBarStyle = tw.div`
-  w-[240px] px-5 dark:bg-color-dark-primary dark:text-white
+  w-[240px] inline-block px-5 dark:bg-color-dark-primary dark:text-white
 `;

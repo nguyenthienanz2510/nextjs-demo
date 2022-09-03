@@ -2,10 +2,11 @@ import { Button } from "@material-ui/core";
 import { signInWithPopup } from "firebase/auth";
 import Head from "next/head";
 import tw from "twin.macro";
-import { auth, provider } from "../../firebase";
+import { auth, provider } from "../../config/firebase";
+import { DivStyle } from "../GlobalStyle";
 
 const Login = () => {
-  const signIn = () => {
+  const handleSignIn = () => {
     signInWithPopup(auth, provider).catch(alert);
   };
 
@@ -19,7 +20,9 @@ const Login = () => {
           <LogoContainer>
             <Logo src="/images/emoij.png" />
           </LogoContainer>
-          <Button onClick={signIn}>Sign In with Google</Button>
+          <Button variant="outlined" onClick={handleSignIn}>
+            Sign In with Google
+          </Button>
         </LoginWrapper>
       </LoginStyle>
     </>

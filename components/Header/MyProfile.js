@@ -6,7 +6,9 @@ const MyProfile = () => {
   return (
     <FlexCenterStyle>
       <UserAvatar />
-      <UserName>NguyenThienAnZ</UserName>
+      <UserName>User Name</UserName>
+      {/* <UserAvatar src={user?.photoURL || ""} />
+      <UserName>{user?.name || "Username"}</UserName> */}
     </FlexCenterStyle>
   );
 };

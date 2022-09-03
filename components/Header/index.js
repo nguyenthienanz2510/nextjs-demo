@@ -2,12 +2,15 @@ import tw from "twin.macro";
 import { FlexCenterStyle } from "../GlobalStyle";
 import ButtonChangeTheme from "./ButtonChangeTheme";
 import MyProfile from "./MyProfile";
-
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 const Header = () => {
   return (
     <HeaderStyle>
       <HeaderContainer>
-        <div>My Logo</div>
+        <FlexCenterStyle>
+          <WhatsAppIcon />
+          My chat-app
+        </FlexCenterStyle>
         <FlexCenterStyle>
           <ButtonChangeTheme />
           <MyProfile />

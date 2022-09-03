@@ -9,16 +9,16 @@ const ButtonChangeTheme = () => {
   return (
     <>
       {theme === "dark" ? (
-        <IconButtonStyle>
-          <LightModeIconStyle
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          />
+        <IconButtonStyle
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          <LightModeIconStyle />
         </IconButtonStyle>
       ) : (
-        <IconButtonStyle>
-          <DarkModeIconStyle
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          />
+        <IconButtonStyle
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          <DarkModeIconStyle />
         </IconButtonStyle>
       )}
     </>

@@ -9,7 +9,7 @@ const Loading = () => {
         <title>Loading...</title>
       </Head>
       <PacmanLoaderWrapper>
-        <PacmanLoader color="#FFAB00" size="60" />
+        <PacmanLoader color="#FFAB00" size="60px" />
       </PacmanLoaderWrapper>
     </LoadingStyle>
   );

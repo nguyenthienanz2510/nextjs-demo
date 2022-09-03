@@ -19,4 +19,4 @@ const SideBarItemStyle = tw.div`
 
 const SideBarItemIcon = tw.div`mx-5`;
 
-const SideBarItemTitle = tw.div``;
+const SideBarItemTitle = tw.div`mr-5`;
