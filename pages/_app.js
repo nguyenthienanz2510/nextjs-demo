@@ -11,8 +11,6 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
 
-  console.log(user);
-
   useEffect(() => {
     const setUserInDb = async () => {
       try {

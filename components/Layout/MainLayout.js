@@ -23,7 +23,7 @@ export default MainLayout;
 const MainLayoutStyle = tw.div`overflow-hidden h-screen bg-color-white dark:bg-color-dark-primary dark:text-color-white`;
 
 const BodyStyle = tw.div`
-  flex h-full
+  flex h-[calc(100vh - 80px)]
 `;
 
 const MessageLayout = tw.div`
@@ -31,5 +31,5 @@ bg-gray-100 dark:bg-color-dark-secondary mr-7 rounded-t-2xl px-[30px] pt-7 flex 
 `;
 
 const MessageContainer = tw.div`
-  rounded-t-2xl bg-color-white dark:bg-color-dark-primary flex-grow
+  rounded-t-2xl bg-color-white dark:bg-color-dark-primary flex-grow relative
 `;

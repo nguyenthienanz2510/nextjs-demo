@@ -19,8 +19,6 @@ export const useRecipient = (conversationUsers) => {
   const [recipientsSnapshot, __loading, __error] =
     useCollection(queryGetRecipient);
 
-  // console.log(recipientsSnapshot);
-
   // recipientSnapshot?.docs could be an empty array, leading to docs[0] being undefined
   // so we have to force "?" after docs[0] because there is no data() on "undefined"
   const recipient = recipientsSnapshot?.docs[0]?.data();

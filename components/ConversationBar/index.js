@@ -25,8 +25,6 @@ const ConversationBar = () => {
 
   const [recipientEmail, setRecipientEmail] = useState("");
 
-  console.log(recipientEmail);
-
   const handleClickOpen = () => {
     setOpen(true);
   };

@@ -1,9 +1,11 @@
 import { doc, getDoc, getDocs } from "firebase/firestore";
+import { useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import tw from "twin.macro";
 import { ConversationScreen } from "../../components";
 import RecipientAvatar from "../../components/ConversationBar/ConversationItem/RecipientAvatar";
 import { StyleH4, StyleSpanSmall } from "../../components/GlobalStyle";
+import InputMessage from "../../components/InputMessage";
 import MainLayout from "../../components/Layout/MainLayout";
 import { auth, db } from "../../config/firebase";
 import { useRecipient } from "../../hooks/useRecipient";
@@ -13,14 +15,18 @@ import {
   transformMessages,
 } from "../../utils/getMessagesInConversation";
 
-const Conversation = ({ conversation, messages }) => {
+const Conversation = ({ conversation, messages, conversationId }) => {
   const [user, _loading, _error] = useAuthState(auth);
 
   const conversationUsers = conversation.users;
 
   const { recipient, recipientEmail } = useRecipient(conversationUsers);
 
-  console.log(recipient, recipientEmail);
+  const autoScrollToEndOfMessageRef = useRef(null);
+
+  const scrollToBottom = () => {
+    autoScrollToEndOfMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <MainLayout>
@@ -40,7 +46,10 @@ const Conversation = ({ conversation, messages }) => {
             )}
           </HeaderInfo>
         </ConversationHeader>
-        <ConversationScreen messages={messages} conversation={conversation} />
+        <ConversationScreen messages={messages} conversation={conversation}>
+          <AutoScrollToEndOfMessage ref={autoScrollToEndOfMessageRef} />
+        </ConversationScreen>
+        <InputMessage scrollToBottom={scrollToBottom} />
       </ConversationContainer>
     </MainLayout>
   );
@@ -67,12 +76,13 @@ export const getServerSideProps = async (context) => {
     props: {
       conversation: conversationSnapshot.data(),
       messages,
+      conversationId,
     },
   };
 };
 
 const ConversationContainer = tw.div`
-    
+    h-full
 `;
 
 const ConversationHeader = tw.div`
@@ -82,3 +92,5 @@ const ConversationHeader = tw.div`
 const HeaderInfo = tw.div`
     flex justify-between flex-col px-4
 `;
+
+const AutoScrollToEndOfMessage = tw.div`mb-5`;

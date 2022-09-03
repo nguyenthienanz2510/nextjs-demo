@@ -16,6 +16,7 @@ export const generateQueryGetMessages = (conversationId) => {
 };
 
 export const transformMessages = (message) => {
+  console.log(message);
   return {
     id: message.id,
     ...message.data(),

@@ -4,8 +4,6 @@ import { useRecipient } from "../../../hooks/useRecipient";
 import RecipientAvatar from "./RecipientAvatar";
 
 const ConversationItem = ({ id, conversationUsers }) => {
-  // console.log(id, conversationUsers);
-
   const { recipient, recipientEmail } = useRecipient(conversationUsers);
 
   const router = useRouter();
