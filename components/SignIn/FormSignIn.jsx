@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import tw from "twin.macro";
-import { GET_DOGS } from "../../lib/generate";
-// import ClientOnly from "../ClientOnly";
+import { LOGIN_MUTATION } from "../../lib/generate";
+import JWTManager from "../../utils/jwt";
 
 const FormSignIn = () => {
   const {
@@ -11,15 +11,24 @@ const FormSignIn = () => {
     formState: { errors },
   } = useForm();
 
-  const [generateCustomerToken, dataMutation] = useMutation(GET_DOGS);
+  const [generateCustomerToken, dataMutation] = useMutation(LOGIN_MUTATION);
 
   console.log(dataMutation);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    generateCustomerToken({
-      variables: { email: data.email, password: data.password },
-    });
+  const onSubmit = async (data) => {
+    try {
+      const response = await generateCustomerToken({
+        variables: { email: data.email, password: data.password },
+      });
+      if (!!response.data?.generateCustomerToken.token) {
+        JWTManager.setToken(response.data.generateCustomerToken.token);
+        console.log("TOKEN: ", response.data.generateCustomerToken.token);
+      } else {
+        console.log("LOGIN ERROR: ", response);
+      }
+    } catch (err) {
+      console.log("CATCH LOGIN ERROR: ", err);
+    }
   };
   return (
     <FormSignInStyle onSubmit={handleSubmit(onSubmit)}>
