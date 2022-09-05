@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { LOGIN_MUTATION } from "../../lib/generate";
@@ -10,6 +11,8 @@ const FormSignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
 
   const [generateCustomerToken, dataMutation] = useMutation(LOGIN_MUTATION);
 
@@ -23,6 +26,8 @@ const FormSignIn = () => {
       if (!!response.data?.generateCustomerToken.token) {
         JWTManager.setToken(response.data.generateCustomerToken.token);
         console.log("TOKEN: ", response.data.generateCustomerToken.token);
+        document.cookie = `customer_token=${response.data.generateCustomerToken.token}`;
+        router.push("/");
       } else {
         console.log("LOGIN ERROR: ", response);
       }
