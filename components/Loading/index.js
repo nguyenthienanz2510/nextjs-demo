@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { PacmanLoader } from "react-spinners";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const Loading = () => {
   return (
