@@ -1,26 +1,19 @@
-import Head from "next/head";
-import { PacmanLoader } from "react-spinners";
+import React from "react";
+import { ScaleLoader } from "react-spinners";
 import tw from "twin.macro";
 
-const Loading = () => {
-  return (
+export default function SpinnerComponent() {
+  // let isLoading = useSelector((state) => {
+  //   return state.spinnerComponentReducer.isLoading;
+  // });
+  let isLoading = false;
+  return isLoading ? (
     <LoadingStyle>
-      <Head>
-        <title>Loading...</title>
-      </Head>
-      <PacmanLoaderWrapper>
-        <PacmanLoader color="#FFAB00" size="60px" />
-      </PacmanLoaderWrapper>
+      <ScaleLoader color="#ff6500" />
     </LoadingStyle>
+  ) : (
+    <></>
   );
-};
+}
 
-export default Loading;
-
-const LoadingStyle = tw.div`
-    h-screen flex justify-center items-center
-`;
-
-const PacmanLoaderWrapper = tw.div`
-pb-36
-`;
+const LoadingStyle = tw.div`z-[100] fixed top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-[rgba(0,0,0,0.4)]`;

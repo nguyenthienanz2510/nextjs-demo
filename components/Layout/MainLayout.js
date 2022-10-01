@@ -12,4 +12,4 @@ const MainLayout = ({ children }) => {
 
 export default MainLayout;
 
-const MainLayoutStyle = tw.div`overflow-hidden h-screen bg-color-white dark:bg-color-dark-primary dark:text-color-white`;
+const MainLayoutStyle = tw.div`overflow-hidden bg-color-white dark:bg-color-dark-primary dark:text-color-white`;
