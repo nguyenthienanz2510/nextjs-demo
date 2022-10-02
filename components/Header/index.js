@@ -2,7 +2,7 @@ import tw from "twin.macro";
 import { FlexCenterStyle } from "../GlobalStyle";
 import ButtonChangeTheme from "./ButtonChangeTheme";
 import MyProfile from "./MyProfile";
-import TerminalIcon from '@mui/icons-material/Terminal';
+import TerminalIcon from "@mui/icons-material/Terminal";
 import Link from "next/link";
 const Header = () => {
   return (
@@ -17,6 +17,9 @@ const Header = () => {
           </a>
         </Link>
         <FlexCenterStyle>
+          <Link href="/admin">
+            <a>Admin</a>
+          </Link>
           <ButtonChangeTheme />
           <MyProfile />
         </FlexCenterStyle>
@@ -37,4 +40,4 @@ const HeaderContainer = tw.div`
 
 const LogoStyle = tw.div`
     ml-2 font-bold
-`
+`;
