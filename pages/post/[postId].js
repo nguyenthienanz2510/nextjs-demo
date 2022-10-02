@@ -36,7 +36,7 @@ const Post = () => {
         <MainLayout>
           <div className="container mx-auto my-10">
             <h2 className="font-bold text-2xl my-5">{postDetail.title}</h2>
-            <p>Created at: {postDetail.createdAt}</p>
+            <p>Created at: {new Date(postDetail.createdAt).toLocaleString('en-GB', {day:'numeric', month: 'numeric',  year:'numeric'}) }</p>
             <p>Creator: {postDetail.creator.name}</p>
             <div className="mx-auto w-2/3 h-auto">
               {/* <Image
