@@ -29,31 +29,42 @@ export default function Home({ posts }) {
             {!!posts &&
               posts.map((post) => {
                 return (
-                  <>
-                    <Card sx={{ maxWidth: 345 }} key={post._id} className="transition-all hover:bg-gray-200">
-                      <CardMedia
-                        component="img"
-                        alt={post.title}
-                        style={{ objectFit: "cover", height: "150px" }}
-                        image={`${BASE_URL}/${post.imageUrl}`}
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div" className="truncate">
-                          {post.title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" className="text-truncation-2">
-                          {post.content}
-                        </Typography>
-                      </CardContent>
-                      <CardActions className="px-4 pb-4 pt-0">
-                        <Link key={post._id} href={`/post/${post._id}`}>
-                          <a className="text-color-primary">
-                            <Button size="small" >Read More</Button>
-                          </a>
-                        </Link>
-                      </CardActions>
-                    </Card>
-                  </>
+                  <Card
+                    sx={{ maxWidth: 345 }}
+                    key={post._id}
+                    className="transition-all hover:bg-gray-200"
+                  >
+                    <CardMedia
+                      component="img"
+                      alt={post.title}
+                      style={{ objectFit: "cover", height: "150px" }}
+                      image={`${BASE_URL}/${post.imageUrl}`}
+                    />
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        className="truncate"
+                      >
+                        {post.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        className="text-truncation-2"
+                      >
+                        {post.content}
+                      </Typography>
+                    </CardContent>
+                    <CardActions className="px-4 pb-4 pt-0">
+                      <Link key={post._id} href={`/post/${post._id}`}>
+                        <a className="text-color-primary">
+                          <Button size="small">Read More</Button>
+                        </a>
+                      </Link>
+                    </CardActions>
+                  </Card>
                 );
               })}
           </div>

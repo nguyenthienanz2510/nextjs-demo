@@ -1,14 +1,12 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
+import { TextareaAutosize } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import { TextareaAutosize, TextField } from "@mui/material";
+import * as React from "react";
 import { useState } from "react";
-import SpinnerComponent from "../Loading";
+import { useLoadingContext } from "../../context/loading";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,20 +14,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogCreateBlog() {
   const [open, setOpen] = React.useState(false);
-
-  const [spinner, setSpinner] = useState(false);
+  
+  const [loading, setLoading] = useLoadingContext();
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
   const handleAddBlog = () => {
-    setSpinner(true);
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("image", image);
     formData.append("content", content);
-
-    console.log(formData);
 
     fetch("http://localhost:8080/feed/post", {
       method: "POST",
@@ -43,14 +40,14 @@ export default function DialogCreateBlog() {
         setTitle("");
         setImage("");
         setContent("");
-        setSpinner(false);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setTitle("");
         setImage("");
         setContent("");
-        setSpinner(false);
+        setLoading(false);
       });
   };
 
@@ -70,8 +67,6 @@ export default function DialogCreateBlog() {
       >
         Add a new Blog
       </button>
-
-      {spinner && <SpinnerComponent />}
       <Dialog
         open={open}
         TransitionComponent={Transition}

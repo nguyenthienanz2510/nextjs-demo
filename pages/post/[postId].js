@@ -4,38 +4,38 @@ import { useState } from "react";
 import { useEffect } from "react";
 import MainLayout from "../../components/Layout/MainLayout";
 import SpinnerComponent from "../../components/Loading";
+import { useLoadingContext } from "../../context/loading";
 import { BASE_URL, postService } from "../../services/post";
 
 const Post = () => {
   const router = useRouter();
   const { postId } = router.query;
 
-  const [spinner, setSpinner] = useState(false);
+  const [loading, setLoading] = useLoadingContext();
 
   const [postDetail, setPostDetail] = useState();
 
   useEffect(() => {
-    setSpinner(true);
+    setLoading(true);
     postService
       .getPostDetail(postId)
       .then((res) => {
         console.log(res.data.post);
         setPostDetail(res.data.post);
-        setSpinner(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setSpinner(false);
+        setLoading(false);
       });
   }, [postId]);
 
   return (
     !!postDetail && (
       <>
-        {spinner && <SpinnerComponent />}
         <MainLayout>
           <div className="container mx-auto my-10">
-            <h2 className="font-bold text-xl my-5">{postDetail.title}</h2>
+            <h2 className="font-bold text-2xl my-5">{postDetail.title}</h2>
             <p>Created at: {postDetail.createdAt}</p>
             <p>Creator: {postDetail.creator.name}</p>
             <div className="mx-auto w-2/3 h-auto">

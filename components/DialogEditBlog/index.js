@@ -10,41 +10,43 @@ import { TextareaAutosize, TextField } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { postService } from "../../services/post";
+import { useLoadingContext } from "../../context/loading";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function DialogEditBlog({ postId }) {
-
   const [open, setOpen] = React.useState(false);
+
+  const [loading, setLoading] = useLoadingContext();
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
-  console.log(postId);
-
   useEffect(() => {
+    setLoading(true);
     postService
       .getPostDetail(postId)
       .then((res) => {
-        console.log(res.data.post);
-        setTitle(res.data.post.title)
-        setContent(res.data.post.content)
+        setTitle(res.data.post.title);
+        setContent(res.data.post.content);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, [postId]);
 
   const handleChangeBlog = () => {
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("image", image);
     formData.append("content", content);
-
-    console.log(formData);
 
     fetch(`http://localhost:8080/feed/post/${postId}`, {
       method: "PUT",
@@ -55,9 +57,11 @@ export default function DialogEditBlog({ postId }) {
       })
       .then((resData) => {
         console.log(resData);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -71,11 +75,11 @@ export default function DialogEditBlog({ postId }) {
 
   return (
     <div>
-      <button className="text-color-primary">
+      <span className="text-color-primary">
         <Button size="small" onClick={handleClickOpen}>
           Edit
         </Button>
-      </button>
+      </span>
       <Dialog
         open={open}
         TransitionComponent={Transition}
